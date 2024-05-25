@@ -1,12 +1,13 @@
 import { Box, Text, Flex, Link } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <Box>
       <Flex
-        h="50px"
+        h="10%"
         w="100%"
-        bgColor="antiquewhite"
+        // bgColor="antiquewhite"
         alignItems="center"
         padding="16px 24px"
         justifyContent="space-between"
@@ -16,7 +17,7 @@ const Navbar = () => {
           Logo
         </Text>
         <Flex>
-          <Link pr="14px" href="/home">
+          <Link pr="14px" href="/">
             Home
           </Link>
           <Link pr="14px" href="/listings">
@@ -31,7 +32,7 @@ const Navbar = () => {
         </Flex>
       </Flex>
       <Box display="flex" justifyContent="center" w="100%">
-          <Outlet />
+        <Outlet />
       </Box>
     </Box>
   );
