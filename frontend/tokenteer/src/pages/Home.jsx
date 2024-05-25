@@ -1,6 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import UserNameAndBadges from "../components/UserNameAndBadges";
 import Events from "../components/Events";
+import { useEffect } from "react";
+import { getGlobalLeaderboard, getLeaderboard } from "../../api/users";
 
 const dataApiResult = {
   name: 'John Mayer',
