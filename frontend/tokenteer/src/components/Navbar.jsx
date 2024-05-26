@@ -1,5 +1,6 @@
-import { Box, Text, Flex, Link } from "@chakra-ui/react";
+import { Box, Image, Flex, Link } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+import Logo from "../assets/logos/main-logo.png"
 
 const Navbar = () => {
   return (
@@ -13,9 +14,10 @@ const Navbar = () => {
         justifyContent="space-between"
         overflow-x="hidden"
       >
-        <Text mr="14px" fontSize="20px" fontWeight="bold">
+        {/* <Text mr="14px" fontSize="20px" fontWeight="bold">
           Logo
-        </Text>
+        </Text> */}
+        <Image src={Logo} alt="main-logo" boxSize="150px"/>
         <Flex>
           <Link pr="14px" href="/">
             Home

@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Image } from "@chakra-ui/react";
 
 const UserNameAndBadges = ({ username }) => {
   const { tokens, name } = username; // Destructure for easier access
@@ -10,7 +10,7 @@ const UserNameAndBadges = ({ username }) => {
     PIONEER: "pioneer",
     NONE: "none",
   };
-  let badgeKey; // This will be used to select the case in the switch statement
+  let badgeKey;
 
   // Determine the badge key based on tokens range
   if (tokens >= 100) {
@@ -31,8 +31,9 @@ const UserNameAndBadges = ({ username }) => {
   let badge;
   switch (badgeKey) {
     case "PIONEER":
-      badge = BADGES.PIONEER;
-      break;
+      return (
+      <Image />
+      );
     case "ADVENTURER":
       badge = BADGES.ADVENTURER;
       break;
