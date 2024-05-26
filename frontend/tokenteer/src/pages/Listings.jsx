@@ -1,31 +1,7 @@
 import DataTable from "react-data-table-component";
-import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Text, Box } from "@chakra-ui/react";
-
-const mockApiResponse = {
-  status: "Upcoming",
-  title: "Volunteering at orphanage",
-  tokensOffered: 30,
-  date: "2024-04-31",
-  description: "A day of volunteer in orphanage home",
-  organizationId: "BBOQh1286q0tLkrHiMA6",
-  categories: "Indoor",
-  maxPeople: 10,
-  duration: 6,
-  numPeople: 0,
-  id: "VedMzhCHisZ9h0pebRRD",
-  organization: {
-    totalMembers: 2000,
-    tokens: 1000,
-    username: "helpsos",
-    role: "organization",
-    foundedDate: "1978-04-22",
-    name: "HelpSOS",
-    description: "A charity organization",
-    activeAreas: "Welfare,Self-Development",
-  },
-};
+import { getEvents } from "../../api/events";
 
 const customStyles = {
   rows: {
@@ -36,20 +12,18 @@ const customStyles = {
   headCells: {
     style: {
       backgroundColor: '#d19352',
-      color: '#000', 
-      fontSize: '16px', 
+      color: '#000',
+      fontSize: '16px',
     },
   },
   cells: {
     style: {
       backgroundColor: '#e8c49b',
       color: '#333',
-      fontSize: '14px', 
+      fontSize: '14px',
     },
   },
 };
-
-
 
 const columns = [
   {
@@ -75,62 +49,50 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    status: (
-      <Text
-        borderRadius="20px"
-        lineHeight="14px"
-        bgColor="#eaf7e1"
-        padding="8px 14px"
-        fontWeight="bold"
-        color="darkgreen"
-      >
-        {mockApiResponse.status}
-      </Text>
-    ),
-    description: <Text whiteSpace="normal">{mockApiResponse.description}</Text>,
-    categories: mockApiResponse.categories,
-    tokensOffered: mockApiResponse.tokensOffered,
-    duration: mockApiResponse.duration,
-  },
-];
+const getDataSource = (data) => {
+  let dataSource = [];
+  let i = 1;
+  for (let d of data) {
+    dataSource.push({
+      id: i,
+      status: (
+        <Text
+          borderRadius="20px"
+          lineHeight="14px"
+          bgColor="#eaf7e1"
+          padding="8px 14px"
+          fontWeight="bold"
+          color="darkgreen"
+        >
+          {d.status}
+        </Text>
+      ),
+      description: <Text whiteSpace="normal">{d.description}</Text>,
+      categories: d.categories,
+      tokensOffered: d.tokensOffered,
+      duration: d.duration,
+    });
+    i++;
+  }
+  return dataSource;
+}
 
 const Listings = () => {
-  // Listings API call
+  const [listingData, setListingData] = useState([]);
 
   useEffect(() => {
     getAllListings();
   }, []);
 
-  const url = `${
-    import.meta.env.VITE_BACKEND_URL
-  }/api/events/getEvents?categories=Indoor`;
-  console.log("URL: ", url);
   const getAllListings = async () => {
-    try {
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_BACKEND_URL
-        }/api/events/getEvents?categories=Indoor`,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-      // console.log("response: ", response);
-      return response.data; 
-    } catch (error) {
-      console.error("Error fetching listings:", error);
-      return [];
-    }
+    const data = await getEvents();
+    console.log(data);
+    setListingData(data);
   };
 
   return (
     <Box id="listings-box" padding="24px" minH="80px" w="100%">
-      <DataTable columns={columns} data={data} selectableRows customStyles={customStyles}/>
+      <DataTable columns={columns} data={getDataSource(listingData)} selectableRows customStyles={customStyles} />
     </Box>
   );
 };

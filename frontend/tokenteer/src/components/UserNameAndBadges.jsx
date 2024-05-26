@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 const UserNameAndBadges = ({ username }) => {
-  const { token, name } = username; // Destructure for easier access
+  const { tokens, name } = username; // Destructure for easier access
   const BADGES = {
     EXPLORER: "explorer",
     VOYAGES: "voyages",
@@ -12,16 +12,16 @@ const UserNameAndBadges = ({ username }) => {
   };
   let badgeKey; // This will be used to select the case in the switch statement
 
-  // Determine the badge key based on token range
-  if (token >= 100) {
+  // Determine the badge key based on tokens range
+  if (tokens >= 100) {
     badgeKey = "PIONEER";
-  } else if (token >= 75) {
+  } else if (tokens >= 75) {
     badgeKey = "ADVENTURER";
-  } else if (token >= 50) {
+  } else if (tokens >= 50) {
     badgeKey = "NAVIGATOR";
-  } else if (token >= 35) {
+  } else if (tokens >= 35) {
     badgeKey = "VOYAGES";
-  } else if (token >= 20) {
+  } else if (tokens >= 20) {
     badgeKey = "EXPLORER";
   } else {
     badgeKey = "NONE";
@@ -55,11 +55,11 @@ const UserNameAndBadges = ({ username }) => {
       <Box id="welcome-user" width="50%" borderRadius="20px" padding="24px" bgColor="antiquewhite" boxShadow="0px 4px 10px rgba(0, 0, 0, 0.25)">
         <Text fontWeight="bold">Hello, {name}!</Text>
       </Box>
-      <Box id="userBadgeAndToken" width="50%" borderRadius="20px" padding="24px" bgColor="antiquewhite" boxShadow="0px 4px 10px rgba(0, 0, 0, 0.25)">
+      <Box id="userBadgeAndtokens" width="50%" borderRadius="20px" padding="24px" bgColor="antiquewhite" boxShadow="0px 4px 10px rgba(0, 0, 0, 0.25)">
         <Text mb={0} fontWeight="bold">
           Level: {badge.toUpperCase()}
         </Text>
-        <Text fontWeight="bold">Token: {token} </Text>
+        <Text fontWeight="bold">tokens: {tokens} </Text>
       </Box>
     </Flex>
   );
