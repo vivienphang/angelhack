@@ -22,6 +22,7 @@ const customStyles = {
   cells: {
     style: {
       fontSize: "14px",
+      backgroundColor: "#e8c49b",
     },
   },
   pagination: {
@@ -53,7 +54,7 @@ const customStyles = {
   },
   tableWrapper: {
     style: {
-      maxHeight: "calc(100vh - 250px)", // Adjust calculation based on your header, footer, etc.
+      maxHeight: "calc(100vh - 250px)",
       overflowY: "auto",
     },
   },
