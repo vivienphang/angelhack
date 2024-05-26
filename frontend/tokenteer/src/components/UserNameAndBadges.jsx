@@ -60,7 +60,7 @@ const UserNameAndBadges = ({ username }) => {
         <Text mb={0} fontWeight="bold">
           Level: {badge.toUpperCase()}
         </Text>
-        <Text fontWeight="bold">tokens: {tokens} </Text>
+        <Text fontWeight="bold">Tokens: {tokens} </Text>
       </Box>
     </Flex>
   );
