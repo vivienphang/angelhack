@@ -5,6 +5,8 @@ import AdventurerBadge from "../assets/badgesIcons/adventurer.png";
 import ExplorerBadge from "../assets/badgesIcons/explorer.png";
 import PioneerBadge from "../assets/badgesIcons/pioneer.png";
 import VoyagerBadge from "../assets/badgesIcons/voyager.png";
+import { useEffect, useState } from "react";
+import { getGlobalLeaderboard as getLeaderboardApi } from "../../api/users";
 
 const customStyles = {
   rows: {
@@ -92,35 +94,13 @@ const columns = [
   },
   {
     name: "Badge Earned",
-    selector: (row) => mapBadgeToIcon(row.badges),
+    selector: (row) => mapBadgeToIcon(row.badge),
   },
 ];
 
-// Mock data for leaderboard
-const participants = [
-  { name: "Alice", tokens: 45, badges: "adventurer" },
-  { name: "Eve", tokens: 12, badges: "explorer" },
-  { name: "Bob", tokens: 42, badges: "adventurer" },
-  { name: "Charlie", tokens: 32, badges: "voyages" },
-  { name: "David", tokens: 29, badges: "explorer" },
-  { name: "Alice", tokens: 45, badges: "adventurer" },
-  { name: "Eve", tokens: 12, badges: "explorer" },
-  { name: "Bob", tokens: 42, badges: "adventurer" },
-  { name: "Charlie", tokens: 32, badges: "voyages" },
-  { name: "David", tokens: 29, badges: "explorer" },
-  { name: "Alice", tokens: 45, badges: "adventurer" },
-  { name: "Eve", tokens: 12, badges: "explorer" },
-  { name: "Bob", tokens: 42, badges: "adventurer" },
-  { name: "Charlie", tokens: 32, badges: "voyages" },
-  { name: "David", tokens: 29, badges: "explorer" },
-  { name: "Alice", tokens: 45, badges: "adventurer" },
-  { name: "Eve", tokens: 12, badges: "explorer" },
-  { name: "Bob", tokens: 42, badges: "adventurer" },
-  { name: "Charlie", tokens: 32, badges: "voyages" },
-  { name: "David", tokens: 29, badges: "explorer" },
-].sort((a, b) => b.tokens - a.tokens);
-
 const Leaderboard = () => {
+  const [participants, setParticipants] = useState([]);
+
   const paginationOptions = {
     rowsPerPageText: "Rows per page:",
     rangeSeparatorText: "of",
@@ -131,6 +111,16 @@ const Leaderboard = () => {
     rowsPerPageOptions: [5],
     initialRowsPerPage: 5,
   };
+
+  useEffect(() => {
+    getLeaderboard();
+  }, []);
+
+  const getLeaderboard = async () => {
+    const data = await getLeaderboardApi();
+    console.log(data);
+    setParticipants(data);
+  }
 
   return (
     <Box padding="20px" boxShadow="0 2px 4px rgba(0,0,0,0.1)" height="60%">
