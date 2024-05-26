@@ -31,7 +31,7 @@ const Navbar = () => {
           </Link>
         </Flex>
       </Flex>
-      <Box display="flex" justifyContent="center" w="100%">
+      <Box display="flex" justifyContent="center" w="100%" flex="1">
         <Outlet />
       </Box>
     </Box>

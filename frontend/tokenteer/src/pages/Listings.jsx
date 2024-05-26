@@ -129,7 +129,7 @@ const Listings = () => {
   };
 
   return (
-    <Box padding="24px">
+    <Box id="listings-box" padding="24px" minH="80px" w="100%">
       <DataTable columns={columns} data={data} selectableRows customStyles={customStyles}/>
     </Box>
   );
