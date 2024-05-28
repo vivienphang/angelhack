@@ -19,6 +19,7 @@ const Rewards = () => {
   }, []);
 
   const getAllPartners = async () => {
+    console.log('get partners...')
     const data = await getPartners();
     console.log(data);
     // const compiledDeals = data.map((deals) => console.log(deals))
